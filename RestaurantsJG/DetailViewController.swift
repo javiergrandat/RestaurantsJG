@@ -18,19 +18,19 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailTextView: UITextView!
     @IBOutlet weak var imageImageView: UIImageView!
     
-    var restaurant:Restaurant = Restaurant(name: "DF Laureles", address: "Avenida Jardin con Nutibara", latitude: 6.342344, longitude: -75.12345, category: "Mexicano", image: "mexican-restaurant")
+    var restaurant:Restaurant?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.nameLabel.text = restaurant.name
-        self.detailTextView.text = restaurant.details
-        self.addressLabel.text = restaurant.address
-        self.telephoneLabel.text = restaurant.telephone
-        self.categoryLabel.text = restaurant.category
-        self.rankingLabel.text = String(restaurant.ranking)
-        self.imageImageView.image = UIImage(named: restaurant.image)
+        self.nameLabel.text = restaurant!.name
+        self.detailTextView.text = restaurant!.details
+        self.addressLabel.text = restaurant!.address
+        self.telephoneLabel.text = restaurant!.telephone
+        self.categoryLabel.text = restaurant!.category
+        self.rankingLabel.text = String(restaurant!.ranking)
+        self.imageImageView.image = UIImage(named: restaurant!.image)
 
     }
 
