@@ -40,14 +40,14 @@ class RestaurantTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.model.restaurantsMocks().count
+        return self.model.restaurants.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RestaurantCell", forIndexPath: indexPath) as! RowTableViewCell
 
-        let restaurant:Restaurant = model.restaurantsMocks()[indexPath.row]
+        let restaurant:Restaurant = model.restaurants[indexPath.row]
         cell.nameLabel.text = restaurant.name
         cell.detailsLabel.text = restaurant.details
         cell.iconImageView.image = UIImage(named:restaurant.image)
@@ -56,7 +56,7 @@ class RestaurantTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let restaurant = model.restaurantsMocks()[indexPath.row]
+        let restaurant = model.restaurants[indexPath.row]
         performSegueWithIdentifier("detail", sender: restaurant)
     }
     
@@ -112,11 +112,21 @@ class RestaurantTableViewController: UITableViewController {
     }
     
     
-    func getRestaurants() -> [Restaurant] {
+    func getRestaurants() {
         
-        let restaurants : [Restaurant] = self.model.restaurantsMocks()
-        return restaurants
+        //let restaurants : [Restaurant] = self.model.restaurantsMocks()
+        
+        model.getRestaurantsFromServer  { (success,response) in
+            if success {
+                self.tableView.reloadData()
+            }
+            else {
+                //ERROR
+            }
+        //return restaurants
         
     }
-
+    }
+    
+    
 }
